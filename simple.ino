@@ -7,7 +7,7 @@
 #define kurang digitalRead(10)==0 //untuk mengurangi waktu
 
 
-LiquidCrystal_I2C lcd(0x20,4,20); //ukuran layar
+LiquidCrystal_I2C lcd(0x27,20,4); //ukuran layar
 
 int relay;
 int set;
@@ -31,6 +31,7 @@ void setup() {
 
  pinMode(relay, OUTPUT);
 
+ Serial.begin(9600);
 }
 
 void print_time(){
