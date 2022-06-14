@@ -3,8 +3,8 @@
 
 #define mulai digitalRead(13)==0 //untuk start
 #define cancel digitalRead(12)==0 //untuk cancel
-#define tambah digitalRead(16)==0 //untuk menambah waktu
-#define kurang digitalRead(17)==0 //untuk mengurangi waktu
+#define tambah digitalRead(11)==0 //untuk menambah waktu
+#define kurang digitalRead(10)==0 //untuk mengurangi waktu
 
 
 LiquidCrystal_I2C lcd(0x20,4,20); //ukuran layar
@@ -26,8 +26,8 @@ void setup() {
  lcd.init();
  pinMode(13, INPUT_PULLUP);
  pinMode(12, INPUT_PULLUP);
- pinMode(16, INPUT_PULLUP);
- pinMode(17, INPUT_PULLUP);
+ pinMode(11, INPUT_PULLUP);
+ pinMode(10, INPUT_PULLUP);
 
  pinMode(relay, OUTPUT);
 
