@@ -6,14 +6,21 @@
 #define tambah digitalRead(16)==0 //untuk menambah waktu
 #define kurang digitalRead(17)==0 //untuk mengurangi waktu
 
+
 LiquidCrystal_I2C lcd(0x20,4,20); //ukuran layar
 
-
+int relay;
+int set;
 char state;
 int cd;
 long millisSebelum;
 int hitungMulai;
 unsigned long milis;
+bool kondisi_relay=0;
+bool t_down;
+int set_detik;
+int set_menit;
+
 
 void setup() {
  lcd.init();
@@ -21,8 +28,17 @@ void setup() {
  pinMode(12, INPUT_PULLUP);
  pinMode(16, INPUT_PULLUP);
  pinMode(17, INPUT_PULLUP);
- 
 
+ pinMode(relay, OUTPUT);
+
+}
+
+void print_time(){
+  set_detik = set_detik - 1;
+  if (set_detik < 0) {
+    set_detik = 59;
+    set_menit = set_menit - 1;
+  }
 }
 
 void loop() {
@@ -90,4 +106,35 @@ void loop() {
    
   }
 
+  lcd.setCursor(0,0);
+  if (set == 0) {
+    lcd.print(" Timer ");
+  }
+  if (set == 1) {
+    lcd.print(" Set Time SS ");
+  }
+  if (set == 3 ) {
+    lcd.print(" Set Timer HH ");
+  }
+
+  lcd.print(set_menit);
+  lcd.print(":");
+  if (set_detik <= 9) {
+    lcd.print("0");
+  }
+  lcd.print(set_detik);
+  lcd.print(" ");
+
+  if (set_detik == 0 && set_menit == 0 && kondisi_relay == 1) {
+    kondisi_relay = 0;
+    digitalWrite(relay,LOW);
+  }
+  
+  if (kondisi_relay = 1){
+    digitalWrite(relay, HIGH);
+  }
+  else {
+    digitalWrite(relay, LOW);
+  }
+  delay(1);
 }
